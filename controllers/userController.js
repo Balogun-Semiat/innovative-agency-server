@@ -18,7 +18,7 @@ async function SignUp(req, res) {
         }
     
         const hashedPassword = await argon2.hash(password);
-        console.log("ARGON2",hashedPassword)
+        // console.log("ARGON2",hashedPassword)
     
         const newUser = await userModel.create({
             firstName,

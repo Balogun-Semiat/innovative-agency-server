@@ -20,9 +20,9 @@ const Messages = async(req, res) => {
     if (!property.seller || !property.seller._id) {
         return res.status(400).send({ message: 'Seller information not found for this property' });
     }
-    // console.log("sell",property.seller)
+   
     const sellerId = property.seller._id;
-    console.log("seller", sellerId)
+  
 
     if (senderId.toString() === sellerId.toString()) {
         return res.status(400).send({ message: "You cannot send a message to yourself" });
@@ -53,7 +53,8 @@ const getAllMessages = async(req, res)=>{
     }
 }
 const fetchMessages = async(req,res)=>{
-    const {sellerId} = req.params;
+    const { sellerId } = req.params;
+    
     try {
         const messages = await messageModel.find({receiver: sellerId}).populate("sender");
         res.send(messages)

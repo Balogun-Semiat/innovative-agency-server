@@ -6,10 +6,10 @@ const userModel = require("../models/userSchema")
 async function getUserProfile(req, res){
     try {
         const userId = req.user.id;
-        console.log("USER:",userId)
+        // console.log("USER:",userId)
         const user = await userModel.findById(userId).populate("postings").populate("messages");
         if(!user) return res.status(404).send({message: "user not found"})
-            console.log(typeof user)
+            // console.log(typeof user)
         return res.status(200).send({message: "User found", user})
 
     } catch (error) {
@@ -21,7 +21,6 @@ async function getUserProfile(req, res){
 const deleteEverything = async (req, res) => {
     try {
         const userId = req.user.id;
-        console.log("userId", typeof userId);
 
         // Find the user
         const user = await userModel.findById(userId);
