@@ -1,4 +1,6 @@
+const path = require('path');
 const express = require("express")
+
 const userRoutes = require("./routes/userroutes");
 const productRoutes = require("./routes/productRoutes")
 const messageRoute = require("./routes/messageRoute");
@@ -11,12 +13,17 @@ const socketio = require("socket.io")
 app.use(cors({origin: "*"}))
 app.use(express.json({extended: "true", limit: "200mb"}))
 app.use(express.urlencoded({extended: "true", limit: "200mb"}))
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(userRoutes);
 app.use(productRoutes);
 app.use(messageRoute);
 app.use(profileRoute)
 
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+  
 const server = app.listen(3500, async()=>{
     try {
         await ConnectToDB()
