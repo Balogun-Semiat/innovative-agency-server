@@ -3,7 +3,7 @@ const { JWT_SECRET } = require("../constants/index")
 
 const createToken = (email) => {
     try{
-        const token = jwt.sign({email}, JWT_SECRET, {expiresIn: "1h"})
+        const token = jwt.sign({email}, JWT_SECRET, {expiresIn: "10m"})
         
         return token
     } catch(error) {
