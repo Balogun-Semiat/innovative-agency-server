@@ -20,9 +20,9 @@ app.use(messageRoute);
 app.use(profileRoute)
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//   });
   
 const server = app.listen(3500, async()=>{
     try {

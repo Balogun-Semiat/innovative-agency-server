@@ -83,11 +83,21 @@ const editPost = async(req, res)=>{
     try {
         const {id} = req.params;
 
-        const property = req.body;
+        const {images, houseDetails, description, location, price, role} = req.body;
 
-        const updateProperty = await productModel.findOneAndUpdate({_id:id}, property);
+        const updatedProperty = {
+            images, 
+            houseDetails, 
+            description, 
+            location, 
+            price, 
+            role
+        };
+
+        const updateProperty = await productModel.findOneAndUpdate({_id:id}, updatedProperty);
+
         if(!updateProperty) return res.status(400).send({message: "Internal server error"});
-        return res.status(200).send({message: "Post has been updated", property})
+        return res.status(200).send({message: "Post has been updated", updatedProperty})
     } catch (error) {
         console.log(error)
     }
